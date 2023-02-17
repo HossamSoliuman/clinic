@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
-   return view( 'about' );
+   return view( 'home' );
 });
+Route::get('/home', function () {
+   return view( 'home' );
+});
+Route::get('appointment',[AppointmentController::class,'show_template']);
+Route::view('register', 'auth.register')->name('register');
+Route::post('appointmet/save',[AppointmentController::class,'save_appointment'])->name('save_appointment');
+Route::post("get_vaction",[AppointmentController::class,'get_vaction'])->name('get_vacantion');
