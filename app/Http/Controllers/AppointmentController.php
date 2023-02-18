@@ -26,20 +26,42 @@ class AppointmentController extends Controller
     }
 
     public function save_appointment(Request $req) {
-        
+
+        //prepairing data
+
+        $doctor_id=$req->doctor_id;
+        $date=$req->date;
+        $service_id=$req->service_id;
         $user_id= Auth::id();
         $user=User::find($user_id);
-        $number= $this->get_number($req->date,$req->doctor_id);     
+        $number= $this->get_number($date,$doctor_id); 
+        $service=Service::find($service_id,"name");
+        $doctor=Doctor::find($doctor_id,['name','phone']);
+
+        //creating
+
         Appointment::create([
-            'doctor_id'=>$req->doctor_id,
+            'doctor_id'=>$doctor_id,
             'user_id'=>$user_id,
-            'service_id'=>$req->service_id,
-            'date'=>$req->date,
+            'service_id'=>$service_id,
+            'date'=>$date,
             'number'=>$number
         ]);
+
+        //sendin messages
+       
+        $data=array();
+        $data['number']=$number;
+        $data['date']=$date;
+        $data['service']=$service->name;
+        $data['user_name']=$user->name;
+        $data['doctor_name']=$doctor->name;
+        $data['doctor_phone']=$doctor->phone;
+
+
         $msg="Appointment booked successfully. Check your eamail please.";
-        Mail::to($user->email)->send(new AppointmentCreated($user->number));
-        return redirect("/")->with('msg',$msg);
+        Mail::to($user->email)->send(new AppointmentCreated($data));
+        return redirect("/")->with('msg',$msg);  
        
     }
     public function get_vacation(Request $req) {

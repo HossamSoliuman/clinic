@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Email</title>
 </head>
 <body>
-<h3>hello</h3>
-    <p>your turn is {{$data}}</p>
+Hello {{$data['user_name']}} from DentCare clinic 
+    <p>your turn is {{$data['number']}} in {{$data['date']}} </p>
+    <p>your service is {{$data['service']}}</p> 
+    <p>with Dr {{$data['doctor_name']}} you can connect him with {{$data['doctor_phone']}} </p>
 </body>
 </html>
