@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAppointment;
 use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator ;
+use Illuminate\Validation\Rule;
 
 class AppointmentController extends Controller
 {
@@ -25,8 +29,9 @@ class AppointmentController extends Controller
         return view('appointment',['doctors'=>$doctors,'services'=>$services,"days"=>$days]);
     }
 
-    public function save_appointment(Request $req) {
+    public function save_appointment(CreateAppointment $req) {
 
+        
         //prepairing data
 
         $doctor_id=$req->doctor_id;
@@ -57,8 +62,6 @@ class AppointmentController extends Controller
         $data['user_name']=$user->name;
         $data['doctor_name']=$doctor->name;
         $data['doctor_phone']=$doctor->phone;
-
-
         $msg="Appointment booked successfully. Check your eamail please.";
         Mail::to($user->email)->send(new AppointmentCreated($data));
         return redirect("/")->with('msg',$msg);  
@@ -99,5 +102,18 @@ class AppointmentController extends Controller
         return Appointment::where('date',$date)->where('doctor_id',$doctor_id)->count() + 1;
 
     }
+    // protected function validating($data) {
+    //     $rules=[
+            
+    //     ];
+    //     $messages=[
+    //         'service_id.required'=>'Please chose a service',
+    //         'doctor_id.required'=>'Please chose a service'
+    //     ];
+    //     $valid_data=Validator::make($data,$rules,$messages);
+    //     if($valid_data->failed()){
+    //         return redirect()->back()->withErrors()->withInput();
+    //     }
+    // }
 }
 

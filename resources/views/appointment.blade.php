@@ -71,31 +71,40 @@
                             <div class="row g-3">
                                 <div class="col-12 col-sm-12">
                                     <select name="service_id"  class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
+                                        <option value="0" selected>Select A Service</option>
                                         @foreach ($services as $service)
                                             <option value="{{$service->id}}">{{$service->name}}</option>
                                         @endforeach
                                     </select>
+                                   
                                 </div>
-                                
+                                @error('service_id')
+                                {{$message}}
+                            @enderror
                                     <div class="col-12 col-sm-12">
                                         <select  name="doctor_id"    class="form-select bg-light border-0" style="height: 55px;">
-                                            <option selected>Select A Doctor</option>
+                                            <option value="0" selected>Select A Doctor</option>
                                             @foreach ($doctors as $doctor)
                                                 <option  value="{{$doctor->id}}"> Dr {{$doctor->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                
+                                    @error('doctor_id')
+                                    {{$message}}
+                                @enderror
                                 
                                 <div class="col-12 col-sm-12">
                                     <select name="date"  class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Select Date</option>
+                                        <option value="0" selected>Select Date</option>
                                        @foreach ($days as $day)
                                            <option value="{{$day['date']}}" style="{{$day['style']}}"  {{$day['abled']}} >{{$day['day']}} {{$day['date']}} {{$day['msg']}} </option>
                                        @endforeach
                                     </select>
+                                    
                                 </div>
+                                @error('date')
+                                        {{$message}}
+                                    @enderror
                                 {{-- <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
                                 </div> --}}
