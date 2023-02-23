@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->id();         
-           $table->foreignId('doctor_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->id();   
+            $table->unsignedBigInteger('doctor_id');      
+           $table->foreignId('doctor_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('service');
             $table->date('date');

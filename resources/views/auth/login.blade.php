@@ -62,10 +62,8 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                            </div>
-                            <div>
                                 <p>Does not have an account? <a href="register">Register</a></p>
-                            </div>
+                            </div>                           
                         </div>
                     </form>
                 </div>

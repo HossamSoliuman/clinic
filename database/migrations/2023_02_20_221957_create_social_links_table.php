@@ -11,16 +11,16 @@ return new class extends Migration
      *
      * @return void
      */
-    
     public function up()
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('password');
-            $table->integer('phone');
-            $table->integer('age');
-
+           $table->string('facebook');
+           $table->string('instagram');
+           $table->string('linkedin');
+           $table->string('twitter');
+           $table->string('photo');
+           $table->foreignId('doctor_id')->references('id')->on('users')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('social_links');
     }
 };

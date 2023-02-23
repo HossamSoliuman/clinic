@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('appointments', function (Blueprint $table) {
-        $table->foreignId('service_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            
+        $table->foreignId('service_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();         
         });
     }
 
@@ -27,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->string('service');
+            
         });
     }
 };

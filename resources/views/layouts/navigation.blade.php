@@ -45,7 +45,7 @@
             <a href="contact.blade.php" class="nav-item nav-link">Contact</a>
         </div>
         <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-        <a href="appointment.blade.php" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-        <a href="register" class="btn btn-primary py-2 px-4 ms-3">Register</a>
+        <a href="/appointment.blade.php" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        <a href="/register" class="btn btn-primary py-2 px-4 ms-3">Register</a>
     </div>
 </nav>

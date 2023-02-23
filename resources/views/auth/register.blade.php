@@ -94,8 +94,13 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <p> Have an account? <a href="login">Login</a></p>
                             </div>
+                            
+                                
+                            
                         </div>
+                       
                     </form>
                 </div>
             </div>

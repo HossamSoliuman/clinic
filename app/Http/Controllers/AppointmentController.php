@@ -23,7 +23,7 @@ class AppointmentController extends Controller
         $this->middleware("auth");
     }
     public function show_template(){
-        $doctors=Doctor::with("vacation")->get();
+        $doctors=User::where('role','doctor')->get(['id','name']);
         $services=Service::all();
         $days=$this->get_days();      
         return view('appointment',['doctors'=>$doctors,'services'=>$services,"days"=>$days]);
@@ -33,7 +33,6 @@ class AppointmentController extends Controller
 
         
         //prepairing data
-
         $doctor_id=$req->doctor_id;
         $date=$req->date;
         $service_id=$req->service_id;
@@ -41,7 +40,7 @@ class AppointmentController extends Controller
         $user=User::find($user_id);
         $number= $this->get_number($date,$doctor_id); 
         $service=Service::find($service_id,"name");
-        $doctor=Doctor::find($doctor_id,['name','phone']);
+        $doctor=User::find($doctor_id,['name','phone']);
 
         //creating
 
@@ -63,7 +62,7 @@ class AppointmentController extends Controller
         $data['doctor_name']=$doctor->name;
         $data['doctor_phone']=$doctor->phone;
         $msg="Appointment booked successfully. Check your eamail please.";
-        Mail::to($user->email)->send(new AppointmentCreated($data));
+       // Mail::to($user->email)->send(new AppointmentCreated($data));
         return redirect("/")->with('msg',$msg);  
        
     }
@@ -102,18 +101,10 @@ class AppointmentController extends Controller
         return Appointment::where('date',$date)->where('doctor_id',$doctor_id)->count() + 1;
 
     }
-    // protected function validating($data) {
-    //     $rules=[
-            
-    //     ];
-    //     $messages=[
-    //         'service_id.required'=>'Please chose a service',
-    //         'doctor_id.required'=>'Please chose a service'
-    //     ];
-    //     $valid_data=Validator::make($data,$rules,$messages);
-    //     if($valid_data->failed()){
-    //         return redirect()->back()->withErrors()->withInput();
-    //     }
-    // }
+    public function delete($id){
+        $appointment=Appointment::find($id);
+        $appointment->delete();
+        return redirect()->back();
+    }
 }
 
