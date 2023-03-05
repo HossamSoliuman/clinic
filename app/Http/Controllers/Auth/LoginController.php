@@ -38,7 +38,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function redirectPath()
+    
+    public function redirectPath():mixed
     {
         
         if(auth()->user()->role=="doctor"){
@@ -47,8 +48,8 @@ class LoginController extends Controller
         }
         else if(auth()->user()->role=="admin")
         {
-            return route('admin');
+            return route('admin.profile');
         }
-        return route('register');
+        
     }
 }
