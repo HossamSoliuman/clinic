@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', function () {
-   return view( 'home' );
+   return view('home');
 });
 Route::get('/home', function () {
-   return view( 'home' );
-});
+   return view('home');
+})->name('home');
 Route::get('appointment',[AppointmentController::class,'show_template']);
 Route::view('register', 'auth.register')->name('register');
 Route::post('appointmet/save',[AppointmentController::class,'save_appointment'])->name('save_appointment');
@@ -40,6 +41,7 @@ Route::middleware(['auth','isDoctor'])->prefix('doctor')->group(function(){
    Route::post('/update/{id}',[DoctorController::class,'update'])->name('doctor.update');
 });
 Route::middleware(['auth','isAdmin'])->prefix('admin')->group(function() {
+   Route::resource('service',ServiceController::class)->name('destroy','service.destroy');
    Route::get('profile',[AdminController::class,'index'])->name('admin.profile');
    Route::get('add_doctor',[AdminController::class,'add_doctor'])->name('admin.add');
    Route::get('show_all_doctors',[AdminController::class,'show_all_doctors'])->name('admin.show_all');

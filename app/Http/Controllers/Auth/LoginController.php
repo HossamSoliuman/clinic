@@ -50,6 +50,7 @@ class LoginController extends Controller
         {
             return route('admin.profile');
         }
+        return route('home');
         
     }
 }

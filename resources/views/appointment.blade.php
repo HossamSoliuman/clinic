@@ -4,7 +4,7 @@
 <body>
     @section('body')
         
-   
+{{--    
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary m-1" role="status">
@@ -17,7 +17,7 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <!-- Spinner End -->
+    <!-- Spinner End --> --}}
 
 
     <!-- Full Screen Search Start -->
@@ -121,27 +121,7 @@
     </div>
     <!-- Appointment End -->
     {{-- get vacations --}}
-    
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
-
-$(document).on('click','#doctor_id',function(event){
-    event.preventDefault();
-    $.ajax({
-    type:'post',
-    url:"{{route('get_vacantion')}}",
-    data:{
-        '_token': "{{csrf_token()}}",
-        'doctor_id': $("input[name='doctor_id']").val(),       
-    },
-    success:function(data) {
-    
-    }, error: function(reject) {
-      
-    }
-   
-    })});
-    
-</script>
+ 
 
     {{-- get vacations end --}}
 

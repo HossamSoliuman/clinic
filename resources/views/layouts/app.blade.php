@@ -34,7 +34,6 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed </small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
@@ -77,11 +76,15 @@
             </div>
             <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
             <a href="/appointment" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-            <a href="/register" class="btn btn-primary py-2 px-4 ms-3">Register</a>            
+            @if (auth()->check())
             <form  id="logout-form" action="{{route('logout')}}" method="POST" >
-               <button  class="btn btn-danger  py-2 px- ms-3" type="submit">logout</button>
-             @csrf
-             </form>          
+                <button  class="btn btn-danger  py-2 px- ms-3" type="submit">logout</button>
+              @csrf
+              </form>  
+            @else
+            <a href="/register" class="btn btn-primary py-2 px-4 ms-3">Register</a>            
+            @endif
+                     
         </div>
     </nav>
        <!-- Full Screen Search Start -->
