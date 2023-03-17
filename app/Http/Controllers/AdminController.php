@@ -11,7 +11,14 @@ class AdminController extends Controller
     public function index(){
         $allAppointments=Appointment::count();
         $commingAppointments=Appointment::where('date','>',date('Y-m-d'))->count();
-        return view('admin.profile',['allAppointments'=>$allAppointments,'commingAppointments'=>$commingAppointments]);
+        $doctors=User::where('role','doctor')->count();
+        $users=User::where('role','user')->count();
+        return view('admin.profile',[           
+        'allAppointments'=>$allAppointments,
+        'commingAppointments'=>$commingAppointments,
+        'doctors'=>$doctors,
+        'users'=>$users
+    ]);
     }
     public function add_doctor(){
         return view('admin.add_doctor');

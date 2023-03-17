@@ -1,0 +1,17 @@
+.navbar-nav .nav-link {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .navbar-nav .active {
+    background-color: #f1f1f1;
+  }
+  .navbar-brand {
+    padding: 10px 0;
+  }
+  button.btn.text-dark i.fa-search {
+    color: #555;
+  }
+  a.btn.btn-primary.py-2.px-4.ms-3 {
+    border-radius: 25px;
+  }
+          

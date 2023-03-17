@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('body')
 
 <div class="container-fluid">
@@ -11,37 +12,45 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="{{route('admin.profile')}}" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            <i class="bi bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-doctor"></i> <span class="ms-1 d-none d-sm-inline">Doctors</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a  href="{{route('admin.add')}}" class="nav-link px-0"> <span class="d-none d-sm-inline">ADD doctor</span>  </a>
+                        <a href="#submenu1" data-toggle="collapse" class="nav-link px-0 align-middle">
+
+                            <i class="bi bi-people"></i><span class="ms-1 d-none d-sm-inline">Doctors</span>
+                        </a>
+                        
+                        <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <li class="nav-item">
+                                <a href="{{route('admin.add')}}" class="nav-link px-0">
+                                    <i class="bi bi-plus-square"></i><span class="d-none d-sm-inline">Add Doctor</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="{{route('admin.show_all')}}"  class="nav-link px-0"> <span class="d-none d-sm-inline">Show all doctors</span> </a>
+                            <li class="nav-item">
+                                <a href="{{route('admin.show_all')}}" class="nav-link px-0">
+                                    <i class="bi bi-table"></i><span class="d-none d-sm-inline">Show All Doctors</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('service.index')}}" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Service</span>
+                            <i class="bi bi-briefcase"></i><span class="ms-1 d-none d-sm-inline">Service</span>
                         </a>
                     </li>
-                   
+                </ul>
             </div>
         </div>
         <div class="col py-3">
-             @if ( session()->has('msg'))
+            @if ( session()->has('msg'))
                 <div class="alert alert-success" role="alert">
                      {{session()->get('msg')}}
-                 </div>  
+                </div>  
             @endif
             @yield('content')
         </div>
     </div>
 </div>
+
 @endsection

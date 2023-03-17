@@ -14,8 +14,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services=Service::all();
+        $services=Service::all();    
+           
+        if( auth()->check() && auth()->user()->role=='admin')    
         return view('admin.service',compact('services'));
+        return view('service',compact('services'));
+        
         
     }
 
@@ -35,13 +39,18 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) :mixed
-    {
-        Service::create([
-            'name'=>$request->service
-        ]);
-        return redirect()->route('service.index')->with(['msg'=>'succussfully created']);
-    }
+    public function store(Request $request)
+{
+    $service = new Service();
+    $service->name = $request->input('service');
+    $service->save();
+
+    return response()->json([
+        'success' => true,
+        'msg'=>'succes'
+    ]);
+}
+
 
     /**
      * Display the specified resource.

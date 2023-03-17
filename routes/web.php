@@ -24,9 +24,13 @@ Auth::routes();
 Route::get('/', function () {
    return view('home');
 });
+
 Route::get('/home', function () {
    return view('home');
 })->name('home');
+Route::view('about','about');
+Route::view('contact','contact');
+Route::get('service',[ServiceController::class,'index']);
 Route::get('appointment',[AppointmentController::class,'show_template']);
 Route::view('register', 'auth.register')->name('register');
 Route::post('appointmet/save',[AppointmentController::class,'save_appointment'])->name('save_appointment');
